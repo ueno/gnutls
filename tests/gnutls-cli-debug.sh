@@ -70,7 +70,7 @@ PID=$!
 wait_server ${PID}
 
 timeout 1800 \
-"${DCLI}" --attime "2017-08-9" -p "${PORT}" localhost >$OUTFILE 2>&1 || fail ${PID} "gnutls-cli-debug run should have succeeded!"
+"${DCLI}" --attime "2017-08-9" -p "${PORT}" localhost >$OUTFILE 2>&1 || { cat "$OUTFILE"; fail ${PID} "gnutls-cli-debug run should have succeeded!"; }
 
 kill ${PID}
 wait
