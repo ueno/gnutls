@@ -106,6 +106,8 @@ dane_strcodes_LDADD = $(LDADD) ../libdane/libgnutls-dane.la
 
 if ENABLE_MINITASN1
 AM_CPPFLAGS += -I$(srcdir)/../lib/minitasn1
+else
+AM_CPPFLAGS += $(LIBTASN1_CFLAGS)
 endif
 
 noinst_LTLIBRARIES = libutils.la
