@@ -92,9 +92,10 @@ COBJECTS = range.c record.c compress.c debug.c cipher.c gthreads.h handshake-tls
 
 if HAVE_ZLIB
 COBJECTS += dlwrap/zlib.c dlwrap/zlibfuncs.h dlwrap/zlib.h
+AM_CPPFLAGS += $(ZLIB_CFLAGS)
 
 if ENABLE_DLOPEN
-AM_CPPFLAGS += $(ZLIB_CFLAGS) -DGNUTLS_ZLIB_ENABLE_DLOPEN=1
+AM_CPPFLAGS += -DGNUTLS_ZLIB_ENABLE_DLOPEN=1
 else
 thirdparty_libadd += $(ZLIB_LIBS)
 endif
@@ -102,9 +103,10 @@ endif
 
 if HAVE_LIBZSTD
 COBJECTS += dlwrap/zstd.c dlwrap/zstdfuncs.h dlwrap/zstd.h
+AM_CPPFLAGS += $(LIBZSTD_CFLAGS)
 
 if ENABLE_DLOPEN
-AM_CPPFLAGS += $(LIBZSTD_CFLAGS) -DGNUTLS_ZSTD_ENABLE_DLOPEN=1
+AM_CPPFLAGS += -DGNUTLS_ZSTD_ENABLE_DLOPEN=1
 else
 thirdparty_libadd += $(LIBZSTD_LIBS)
 endif
@@ -113,10 +115,12 @@ endif
 if HAVE_LIBBROTLI
 COBJECTS += dlwrap/brotlienc.c dlwrap/brotliencfuncs.h dlwrap/brotlienc.h
 COBJECTS += dlwrap/brotlidec.c dlwrap/brotlidecfuncs.h dlwrap/brotlidec.h
+AM_CPPFLAGS += $(LIBBROTLIENC_CFLAGS)
+AM_CPPFLAGS += $(LIBBROTLIDEC_CFLAGS)
 
 if ENABLE_DLOPEN
-AM_CPPFLAGS += $(LIBBROTLIENC_CFLAGS) -DGNUTLS_BROTLIENC_ENABLE_DLOPEN=1
-AM_CPPFLAGS += $(LIBBROTLIDEC_CFLAGS) -DGNUTLS_BROTLIDEC_ENABLE_DLOPEN=1
+AM_CPPFLAGS += -DGNUTLS_BROTLIENC_ENABLE_DLOPEN=1
+AM_CPPFLAGS += -DGNUTLS_BROTLIDEC_ENABLE_DLOPEN=1
 else
 thirdparty_libadd += $(LIBBROTLIENC_LIBS)
 thirdparty_libadd += $(LIBBROTLIDEC_LIBS)
